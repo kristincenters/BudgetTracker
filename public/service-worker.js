@@ -49,11 +49,11 @@ self.addEventListener('fetch', function (evt) {
 	}
 
 	evt.respondWith(
-		fetch(event.request).catch(function () {
-			return caches.match(event.request).then(function (response) {
+		fetch(evt.request).catch(function () {
+			return caches.match(evt.request).then(function (response) {
 				if (response) {
 					return response;
-				} else if (event.request.headers.get('accept').includes('text/html')) {
+				} else if (evt.request.headers.get('accept').includes('text/html')) {
 					// return the cached home page for all requests for html pages
 					return caches.match('/');
 				}
