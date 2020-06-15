@@ -67,7 +67,7 @@ self.addEventListener('fetch', function (evt) {
 
 		return;
 	}
-	//renders site when offline
+	//loads site when offline
 	evt.respondWith(
 		caches.match(evt.request).then((response) => {
 			return response || fetch(evt.request);
