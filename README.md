@@ -6,7 +6,7 @@ This budgeting application keeps track of personal finances in both online and o
 
 ## [Tracker Application Deployed on Heroku](https://intense-spire-67552.herokuapp.com/)
 
-![](./public/assets/icons/pwa1.png)
+![](./public/assets/icons/pwa.1.png)
 
 ## Technology Stack
 

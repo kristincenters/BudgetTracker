@@ -3,15 +3,15 @@ const FILES_TO_CACHE = [
 	'/index.html',
 	'/manifest.webmanifest',
 	'/assets/css/styles.css',
-	'/assets/js/index.js',
+	'/index.js',
 	'/assets/icons/icon-192x192.png',
 	'/assets/icons/icon-512x512.png',
+	'/db.js',
 ];
 
 const CACHE_NAME = 'static-cache-v2';
 const DATA_CACHE_NAME = 'data-cache-v1';
 
-// install
 self.addEventListener('install', function (evt) {
 	evt.waitUntil(
 		caches.open(CACHE_NAME).then((cache) => {
@@ -19,6 +19,26 @@ self.addEventListener('install', function (evt) {
 			return cache.addAll(FILES_TO_CACHE);
 		})
 	);
+
+	self.skipWaiting();
+});
+
+// activate
+self.addEventListener('activate', function (evt) {
+	evt.waitUntil(
+		caches.keys().then((keyList) => {
+			return Promise.all(
+				keyList.map((key) => {
+					if (key !== CACHE_NAME && key !== DATA_CACHE_NAME) {
+						console.log('Removing old cache data', key);
+						return caches.delete(key);
+					}
+				})
+			);
+		})
+	);
+
+	self.clients.claim();
 });
 
 // fetch
@@ -47,17 +67,10 @@ self.addEventListener('fetch', function (evt) {
 
 		return;
 	}
-
+	//renders site when offline
 	evt.respondWith(
-		fetch(evt.request).catch(function () {
-			return caches.match(evt.request).then(function (response) {
-				if (response) {
-					return response;
-				} else if (evt.request.headers.get('accept').includes('text/html')) {
-					// return the cached home page for all requests for html pages
-					return caches.match('/');
-				}
-			});
+		caches.match(evt.request).then((response) => {
+			return response || fetch(evt.request);
 		})
 	);
 });
