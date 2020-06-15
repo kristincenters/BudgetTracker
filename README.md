@@ -2,11 +2,11 @@
 
 ![Badge](https://img.shields.io/static/v1?label=License&message=MIT&color=<COLOR>?style=plastic)
 
-This application tracks your daily workout. It will display logged exercises, distance traveled and allow the user to track name, type, weight, sets and reps of resistance exercises.
+This budgeting application keeps track of personal finances in both online and offline modes.
 
 ## [Tracker Application Deployed on Heroku](https://intense-spire-67552.herokuapp.com/)
 
-![](./public/assets/icons/pwa.gif)
+![](./public/assets/icons/pwa1.png)
 
 ## Technology Stack
 
@@ -15,13 +15,9 @@ HTML, CSS, JS, Express, Mongo, Mongoose, Git
 ## Deployment
 
 1. Clone the application
-2. Run "npm i or npm install for following packages:
-
-- mongoose and mongo
-- express
-- lite-server
-
+2. Run "npm i or npm install
 3. Run node server
+4. Open deployed app, open inspect and click Network tab
 
 ## Contact
 
